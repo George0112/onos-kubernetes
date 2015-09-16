@@ -1,0 +1,41 @@
+{
+  "kind": "ReplicationController",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "leaf_spine_fabric",
+    "creationTimestamp": null,
+    "labels": {
+      "service": "leaf_spine_fabric"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "service": "leaf_spine_fabric"
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "service": "leaf_spine_fabric"
+        }
+      },
+      "spec": {
+        "volumes": null,
+        "containers": [
+          {
+            "name": "leaf_spine_fabric",
+            "image": "ciena/mininet",
+            "resources": {},
+            "imagePullPolicy": ""
+          }
+        ],
+        "restartPolicy": "Always",
+        "serviceAccountName": ""
+      }
+    }
+  },
+  "status": {
+    "replicas": 0
+  }
+}

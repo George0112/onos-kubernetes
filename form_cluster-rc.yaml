@@ -1,0 +1,41 @@
+{
+  "kind": "ReplicationController",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "form_cluster",
+    "creationTimestamp": null,
+    "labels": {
+      "service": "form_cluster"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "service": "form_cluster"
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "service": "form_cluster"
+        }
+      },
+      "spec": {
+        "volumes": null,
+        "containers": [
+          {
+            "name": "form_cluster",
+            "image": "ciena/onos-form-cluster",
+            "resources": {},
+            "imagePullPolicy": ""
+          }
+        ],
+        "restartPolicy": "Always",
+        "serviceAccountName": ""
+      }
+    }
+  },
+  "status": {
+    "replicas": 0
+  }
+}
