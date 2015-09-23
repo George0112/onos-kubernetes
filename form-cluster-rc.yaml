@@ -2,30 +2,30 @@
   "kind": "ReplicationController",
   "apiVersion": "v1",
   "metadata": {
-    "name": "leaf_spine_fabric",
+    "name": "form-cluster",
     "creationTimestamp": null,
     "labels": {
-      "service": "leaf_spine_fabric"
+      "service": "form-cluster"
     }
   },
   "spec": {
     "replicas": 1,
     "selector": {
-      "service": "leaf_spine_fabric"
+      "service": "form-cluster"
     },
     "template": {
       "metadata": {
         "creationTimestamp": null,
         "labels": {
-          "service": "leaf_spine_fabric"
+          "service": "form-cluster"
         }
       },
       "spec": {
         "volumes": null,
         "containers": [
           {
-            "name": "leaf_spine_fabric",
-            "image": "ciena/mininet",
+            "name": "form-cluster",
+            "image": "ciena/onos-form-cluster",
             "resources": {},
             "imagePullPolicy": ""
           }

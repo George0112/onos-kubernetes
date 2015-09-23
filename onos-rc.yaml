@@ -2,29 +2,29 @@
   "kind": "ReplicationController",
   "apiVersion": "v1",
   "metadata": {
-    "name": "fabric_controller_1",
+    "name": "onos",
     "creationTimestamp": null,
     "labels": {
-      "service": "fabric_controller_1"
+      "service": "onos"
     }
   },
   "spec": {
-    "replicas": 1,
+    "replicas": 3,
     "selector": {
-      "service": "fabric_controller_1"
+      "service": "onos"
     },
     "template": {
       "metadata": {
         "creationTimestamp": null,
         "labels": {
-          "service": "fabric_controller_1"
+          "service": "onos"
         }
       },
       "spec": {
         "volumes": null,
         "containers": [
           {
-            "name": "fabric_controller_1",
+            "name": "onos",
             "image": "ciena/onos",
             "resources": {},
             "imagePullPolicy": ""
