@@ -53,4 +53,5 @@ scale:
         read -r -p "Update the ONOS cluster? [y/N]: " CONTINUE; \
     done ; \
     [ $$CONTINUE = "y" ] || [ $$CONTINUE = "Y" ] || (echo "Exiting."; exit 1;)
+	sleep 20
 	./onos-form-cluster -u karaf -p karaf `kubectl describe pod onos | grep IP | sed -E 's/IP:[[:space:]]+//' | awk '{print $1}' ORS=' '`
