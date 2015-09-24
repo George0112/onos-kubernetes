@@ -2,20 +2,25 @@
 # -----------------------------------------------------------------------------
 # Forms ONOS cluster using REST API of each separate instance.
 # -----------------------------------------------------------------------------
-
-[ $# -lt 2 ] && echo "usage: $(basename $0) ip1 ip2..." && exit 1
-
-# Scan arguments for user/password or other options...
-while getopts u:p: o; do
+usage() {
+  echo "usage: $PROG -u <user> -p <password> -h ip1 ip2 ip3..."
+  exit 1
+}
+nodes=
+while getopts u:p:h o; do
     case "$o" in
         u) user=$OPTARG;;
         p) password=$OPTARG;;
+        h) usage;;
+        *) echo $o ;;
     esac
 done
-user=${user:-onos}           # user defaults to 'onos'
-password=${password:-$user}  # password defaults to user name if not specified
-let OPC=$OPTIND-1
-shift $OPC
+
+shift $(($OPTIND - 1))
+
+[ -z "$user" -o -z "$password" ] && usage
+
+[ $# -lt 2 ] && usage
 
 ip=$1
 shift
@@ -34,6 +39,5 @@ echo "], \"ipPrefix\": \"$ipPrefix.*\" }" >> $aux
 
 for node in $ip $nodes; do
     echo "Forming cluster on $node..."
-    curl --user $user:$password -X POST \
-        http://$node:8181/onos/v1/cluster/configuration -d @$aux
+    curl -X POST -u $user:$password http://$node:8181/onos/v1/cluster/configuration -d @$aux
 done
