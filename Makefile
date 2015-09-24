@@ -44,5 +44,13 @@ mininet:
 delmininetrc:
 	kubectl delete -f leaf-spine-fabric-rc.yaml
 
-
 cluster:
+	./onos-form-cluster -u karaf -p karaf `kubectl describe pod onos | grep IP | sed -E 's/IP:[[:space:]]+//' | awk '{print $1}' ORS=' '`
+
+scale:
+	kubectl scale rc onos --replicas=$(COUNT)
+	@while [ -z "$$CONTINUE" ]; do \
+        read -r -p "Update the ONOS cluster? [y/N]: " CONTINUE; \
+    done ; \
+    [ $$CONTINUE = "y" ] || [ $$CONTINUE = "Y" ] || (echo "Exiting."; exit 1;)
+    ./onos-form-cluster -u karaf -p karaf `kubectl describe pod onos | grep IP | sed -E 's/IP:[[:space:]]+//' | awk '{print $1}' ORS=' '`
