@@ -26,6 +26,9 @@ ps:
 onosrc:
 	kubectl create -f onos-rc.yaml
 
+onosip:
+	kubectl describe pod onos | grep IP | sed -E 's/IP:[[:space:]]+//'
+
 delonosrc:
 	kubectl delete -f onos-rc.yaml
 
